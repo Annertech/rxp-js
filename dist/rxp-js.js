@@ -1,6 +1,6 @@
-/*! rxp-js - v1.3.1 - 2018-08-30
- * The official Realex Payments JS Library
- * https://github.com/realexpayments/rxp-js
+/*! rxp-js - v1.3.1-21 - 2018-08-30
+ * A fork of the official Realex Payments JS Library
+ * https://github.com/annertech/rxp-js
  * Licensed MIT
  */
 var RealexHpp = (function () {
@@ -127,20 +127,20 @@ var RealexHpp = (function () {
 			var form = document.createElement("form");
 			form.setAttribute("method", "POST");
 			form.setAttribute("action", hppUrl);
-			
+
 			var versionSet = false;
-	
+
 			for (var key in token) {
 				if (key === "HPP_VERSION"){
 					versionSet = true;
 				}
 				form.appendChild(internal.createFormHiddenInput(key, token[key]));
 			}
-			
+
 			if (versionSet === false){
 				form.appendChild(internal.createFormHiddenInput("HPP_VERSION", "2"));
 			}
-			
+
 			if (ignorePostMessage) {
 				form.appendChild(internal.createFormHiddenInput("MERCHANT_RESPONSE_URL", redirectUrl));
 			} else {
@@ -539,7 +539,7 @@ var RealexHpp = (function () {
 			return {
 				redirect: function () {
 					var form = internal.createForm(document, token, true);
-					document.body.append(form);
+					document.body.appendChild(form);
 					form.submit();
 				},
 				setToken: function (hppToken) {
